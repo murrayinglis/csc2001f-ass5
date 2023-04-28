@@ -23,6 +23,9 @@ public class GraphExperiment {
      * @throws FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException {
+        
+        System.out.println("Creating graphs..."); // Trace print statement
+
 
         // Clear the current contents of the data file
         try {
@@ -116,5 +119,9 @@ public class GraphExperiment {
                 e.printStackTrace();
             }
         }
+
+
+        System.out.println("Finished!"); // Trace print statement
+
     }    
 }

@@ -1,1 +1,1 @@
-typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"main","l":"Edge"},{"p":"main","l":"Graph"},{"p":"main","l":"GraphException"},{"p":"main","l":"GraphExperiment"},{"p":"main","l":"Instrumentation"},{"p":"main","l":"Path"},{"p":"main","l":"RandomGraphGenerator"},{"p":"main","l":"Vertex"}]
+typeSearchIndex = [{"l":"All Classes","url":"allclasses-index.html"},{"p":"main","l":"Graph"},{"p":"main","l":"GraphException"},{"p":"main","l":"GraphExperiment"},{"p":"main","l":"Instrumentation"},{"p":"main","l":"RandomGraphGenerator"}]
