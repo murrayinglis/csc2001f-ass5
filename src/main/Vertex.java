@@ -1,8 +1,9 @@
+package main;
 import java.util.List;
 import java.util.LinkedList;
 
 // Represents a vertex in the graph.
-class Vertex
+public class Vertex
 {
     public String     name;   // Vertex name
     public List<Edge> adj;    // Adjacent vertices

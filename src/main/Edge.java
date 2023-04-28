@@ -1,5 +1,6 @@
+package main;
 // Represents an edge in the graph.
-class Edge
+public class Edge
 {
     public Vertex     dest;   // Second vertex in Edge
     public double     cost;   // Edge cost
