@@ -1,31 +1,50 @@
 package main;
 
+/**
+ * Instrumentation class.
+ * Used to store data regarding operation counts for the Graph class
+ * 
+ * @author Murray Inglis
+ */
 public class Instrumentation {
+    // Instance variables (counters)
     private int vCount;
     private int eCount;
     private int pqCount;
 
+    /**
+     * Instrumentation constructor
+     * 
+     * @param vCount
+     * @param eCount
+     * @param pqCount
+     */
     public Instrumentation(int vCount, int eCount, int pqCount) 
     {
         this.vCount = vCount;
         this.eCount = eCount;
         this.pqCount = pqCount;
     }
-
-    public Instrumentation() 
-    {
-        this.vCount = 0;
-        this.eCount = 0;
-    }
-
-    public void setVCount(int vCount) {this.vCount = vCount;}
-
-    public void setECount(int eCount) {this.eCount = eCount;}
-
+    
+    /**
+     * Get the number of vertex operations
+     * 
+     * @return
+     */
     public int getVCount() {return this.vCount;}
 
+    /**
+     * Get the number of edge operations
+     * 
+     * @return
+     */
     public int getECount() {return this.eCount;}
 
+    /**
+     * Get the number of priority queue operations
+     * 
+     * @return
+     */
     public int getPQCount() {return this.pqCount;}
 }
 

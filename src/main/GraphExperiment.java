@@ -1,12 +1,21 @@
 package main;
 
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  * GraphExperiment class
@@ -27,10 +36,14 @@ public class GraphExperiment {
         System.out.println("Creating graphs..."); // Trace print statement
 
 
-        // Clear the current contents of the data file
+        // Clear the current contents of the data files
         try {
             FileWriter out = new FileWriter("data/Data.txt",false);
             out.write("V E vCount eCount pqCount\n");
+            out.close();
+            
+            out = new FileWriter("data/Plot.txt",false);
+            out.write("V ops ElogV\n");
             out.close();
         }
         catch (IOException e)
@@ -102,7 +115,7 @@ public class GraphExperiment {
             // Getting instrumentation object
             Instrumentation instrumentation = g.getInstrumentation();
 
-            // Generating data .txt file for the current graph
+            // Generating Data.txt file for the current graph
             try {
                 
                 // Writing new information to the file
@@ -118,10 +131,82 @@ public class GraphExperiment {
             {
                 e.printStackTrace();
             }
+
+            // Generating Plot.txt file for the current graph
+            try {
+                
+                // Writing new information to the file
+                FileWriter out = new FileWriter("data/Plot.txt",true);
+
+                int ops = instrumentation.getECount()+instrumentation.getVCount()+instrumentation.getPQCount();
+                double ElogV = set[i][1]*(Math.log(set[i][0])/Math.log(2));
+
+                out.write(set[i][0] + " ");
+                out.write(ops + " ");
+                out.write(ElogV + "\n");
+                out.close();
+            }
+            catch (IOException e)
+            {
+                e.printStackTrace();
+            }
         }
 
 
         System.out.println("Finished!"); // Trace print statement
+        
+        // Creating line chart
+         // Read data from file
+         ArrayList<Double> ops = new ArrayList<>();
+         ArrayList<Double> ElogV = new ArrayList<>();
+         File file = new File("data/Plot.txt");
+         Scanner scanner = new Scanner(file);
+         scanner.nextLine();
+         while (scanner.hasNext()) {
+             int v = scanner.nextInt();
+             int op = scanner.nextInt();
+             double elogv = scanner.nextDouble();
+             ops.add((double) op);
+             ElogV.add(elogv);
+         }
+         scanner.close();
+ 
+         // Create dataset
+         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+         for (int i = 0; i < ops.size(); i++) {
+             dataset.addValue(ops.get(i), "Ops", String.format("V=%d", i+1));
+             dataset.addValue(ElogV.get(i), "ElogV", String.format("V=%d", i+1));
+         }
+ 
+         // Create chart
+         JFreeChart chart = ChartFactory.createLineChart(
+                 "Ops and ElogV", // Chart title
+                 "V", // X-axis label
+                 "Magnitude", // Y-axis label
+                 dataset, // Dataset
+                 PlotOrientation.VERTICAL, // Plot orientation
+                 true, // Show legend
+                 true, // Use tooltips
+                 false // Generate URLs
+         );
+         
+         try {
+             ChartUtilities.writeChartAsJPEG(new FileOutputStream("data/chart_javalib.jpeg"), chart, 600, 400);
+         } catch (IOException e) {e.printStackTrace();}
+         
 
+
+         // Creating line chart using python
+         try {
+            ProcessBuilder pb = new ProcessBuilder("python3", "src/PythonScripts/plot.py");
+            pb.redirectErrorStream(true);
+            pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
+            Process process = pb.start();
+            int exitCode = process.waitFor();
+            System.out.println("Exited with code " + exitCode);
+         }
+         catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+         }
     }    
 }

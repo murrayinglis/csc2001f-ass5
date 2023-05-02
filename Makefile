@@ -4,9 +4,10 @@ JAVA=/usr/bin/java
 
 SRCDIR=src/main
 BINDIR=bin
+LIBDIR=lib
 
 $(BINDIR)/main/%.class: $(SRCDIR)/%.java 
-	$(JAVAC) -d $(BINDIR) -cp $(BINDIR) -sourcepath $(SRCDIR) $<
+	$(JAVAC) -d $(BINDIR) -cp $(BINDIR):$(LIBDIR)/* -sourcepath $(SRCDIR) $<
 
 CLASSES=Instrumentation.class GraphException.class Graph.class RandomGraphGenerator.class GraphExperiment.class
 CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/main/%.class)
@@ -15,6 +16,6 @@ default: $(CLASS_FILES)
 clean:
 	rm $(BINDIR)/main/*.class
 run: $(CLASS_FILES)
-	java -cp $(BINDIR) main/GraphExperiment
+	java -cp $(BINDIR):$(LIBDIR)/* main/GraphExperiment
 javadoc:
 	javadoc -d docs -cp $(BINDIR) -sourcepath src/ main
