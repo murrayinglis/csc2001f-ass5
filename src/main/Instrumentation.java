@@ -15,9 +15,9 @@ public class Instrumentation {
     /**
      * Instrumentation constructor
      * 
-     * @param vCount
-     * @param eCount
-     * @param pqCount
+     * @param vCount number of vertex operations as an <code/>int<code>
+     * @param eCount number of edge operations as an <code/>int<code>
+     * @param pqCount number of priority queue operations as an <code/>int<code>
      */
     public Instrumentation(int vCount, int eCount, int pqCount) 
     {
@@ -29,21 +29,21 @@ public class Instrumentation {
     /**
      * Get the number of vertex operations
      * 
-     * @return
+     * @return the number of vertex operations as an <code/>int<code>
      */
     public int getVCount() {return this.vCount;}
 
     /**
      * Get the number of edge operations
      * 
-     * @return
+     * @return the number of edge operations as an <code/>int<code>
      */
     public int getECount() {return this.eCount;}
 
     /**
      * Get the number of priority queue operations
      * 
-     * @return
+     * @return the number of priority queue operations as an <code/>int<code>
      */
     public int getPQCount() {return this.pqCount;}
 }

@@ -18,12 +18,27 @@ public class Graph
 
     private Instrumentation instrumentation;
 
+    /**
+     * Get the instrumentation object
+     * 
+     * @return the instrumentation object as an <code/>Instrumentation<code>
+     */
     public Instrumentation getInstrumentation() {return this.instrumentation;}
 
+    /**
+     * Get the vertex map
+     * 
+     * @return the vertex map as a <code/>Map<String,Vertex><code>
+     */
     public Map<String,Vertex> getVertexMap() {return this.vertexMap;}
 
     /**
      * Add a new edge to the graph.
+     * 
+     * @param sourceName the source of the edge as a <code/>String<code>
+     * @param destName the destination of the edge as a <code/>String<code>
+     * @param cost the weight of the edge as a <code/>double<code>
+     * 
      */
     public void addEdge( String sourceName, String destName, double cost )
     {
@@ -36,6 +51,8 @@ public class Graph
      * Driver routine to handle unreachables and print total cost.
      * It calls recursive routine to print shortest path to
      * destNode after a shortest path algorithm has run.
+     * 
+     * @param destName the node in the graph to end the path at as a <code/>String<code>
      */
     public void printPath( String destName )
     {
@@ -55,6 +72,9 @@ public class Graph
     /**
      * If vertexName is not present, add it to vertexMap.
      * In either case, return the Vertex.
+     * 
+     * @param vertexName the vertex name as a <code/>String<code>
+     * @return the vertex object as a <code/>Vertex<code>
      */
     private Vertex getVertex( String vertexName )
     {
@@ -71,6 +91,8 @@ public class Graph
      * Recursive routine to print shortest path to dest
      * after running shortest path algorithm. The path
      * is known to exist.
+     * 
+     * @param dest the node in the graph to end the path at as a <code/>Vertex<code>
      */
     private void printPath( Vertex dest )
     {
@@ -95,6 +117,8 @@ public class Graph
     /**
      * Single-source weighted shortest-path algorithm. (Dijkstra) 
      * using priority queues based on the binary heap
+     * 
+     * @param startName the starting node in the graph as a <code/>String<code>
      */
     public void dijkstra( String startName )
     {

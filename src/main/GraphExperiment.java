@@ -66,7 +66,7 @@ public class GraphExperiment {
             randomGraph.generateGraph();
 
             // Generating random .txt graph file
-            String graphFileName = "graphs/Graph_" + set[i][0] + "_" + set[i][1] + ".txt"; 
+            String graphFileName = "data/graphs/Graph_" + set[i][0] + "_" + set[i][1] + ".txt"; 
             try (PrintWriter out = new PrintWriter(graphFileName)) {
                 out.println(randomGraph.toString());
                 out.close();
@@ -155,7 +155,7 @@ public class GraphExperiment {
 
         System.out.println("Finished!"); // Trace print statement
         
-        // Creating line chart
+        // Creating line chart using Java library, JFreeChart
          // Read data from file
          ArrayList<Double> ops = new ArrayList<>();
          ArrayList<Double> ElogV = new ArrayList<>();
@@ -181,7 +181,7 @@ public class GraphExperiment {
          // Create chart
          JFreeChart chart = ChartFactory.createLineChart(
                  "Ops and ElogV", // Chart title
-                 "V", // X-axis label
+                 "Experiment number", // X-axis label
                  "Magnitude", // Y-axis label
                  dataset, // Dataset
                  PlotOrientation.VERTICAL, // Plot orientation

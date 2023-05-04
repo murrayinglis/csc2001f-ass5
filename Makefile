@@ -14,8 +14,8 @@ CLASS_FILES=$(CLASSES:%.class=$(BINDIR)/main/%.class)
 
 default: $(CLASS_FILES)
 clean:
-	rm $(BINDIR)/main/*.class
+	rm $(BINDIR)/main/*.class data/graphs/* data/*.jpeg data/*.txt
 run: $(CLASS_FILES)
 	java -cp $(BINDIR):$(LIBDIR)/* main/GraphExperiment
 javadoc:
-	javadoc -d docs -cp $(BINDIR) -sourcepath src/ main
+	javadoc -d docs -cp $(BINDIR):$(LIBDIR)/* -sourcepath src/ main

@@ -17,8 +17,8 @@ public class RandomGraphGenerator {
     /**
      * Constructor for generating a graph with a specific number of vertices and edges
      * 
-     * @param numberVertices
-     * @param numberEdges
+     * @param numberVertices the number of vertices as an <code/>int<code>
+     * @param numberEdges the number of edges as an <code/>int<code>
      */
     public RandomGraphGenerator(int numberVertices, int numberEdges)
     {
@@ -88,13 +88,14 @@ public class RandomGraphGenerator {
     /**
      * Get the label of the last node in the graph
      * 
-     * @return
+     * @return the last node in the graph as a <code/>String<code>
      */
     public String getLastVertex() {return this.lastVertex;}
 
     /**
      * Converts the graph array to a string representation
      * 
+     * @return the graph converted to a <code/>String<code>
      */
     public String toString() {
 
@@ -114,7 +115,7 @@ public class RandomGraphGenerator {
     /**
      * Get the number of rows in the graph
      * 
-     * @return
+     * @return the number of edges as an <code/>int<code>
      */
     public int getNumberEdges() {return edges.size();}
 }
