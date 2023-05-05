@@ -156,57 +156,56 @@ public class GraphExperiment {
         System.out.println("Finished!"); // Trace print statement
         
         // Creating line chart using Java library, JFreeChart
-         // Read data from file
-         ArrayList<Double> ops = new ArrayList<>();
-         ArrayList<Double> ElogV = new ArrayList<>();
-         File file = new File("data/Plot.txt");
-         Scanner scanner = new Scanner(file);
-         scanner.nextLine();
-         while (scanner.hasNext()) {
-             int v = scanner.nextInt();
-             int op = scanner.nextInt();
-             double elogv = scanner.nextDouble();
-             ops.add((double) op);
-             ElogV.add(elogv);
-         }
-         scanner.close();
+        // Read data from file
+        ArrayList<Double> ops = new ArrayList<>();
+        ArrayList<Double> ElogV = new ArrayList<>();
+        File file = new File("data/Plot.txt");
+        Scanner scanner = new Scanner(file);
+        scanner.nextLine();
+        while (scanner.hasNext()) {
+            int v = scanner.nextInt();
+            int op = scanner.nextInt();
+            double elogv = scanner.nextDouble();
+            ops.add((double) op);
+            ElogV.add(elogv);
+        }
+        scanner.close();
  
-         // Create dataset
-         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-         for (int i = 0; i < ops.size(); i++) {
-             dataset.addValue(ops.get(i), "Ops", String.format("V=%d", i+1));
-             dataset.addValue(ElogV.get(i), "ElogV", String.format("V=%d", i+1));
-         }
+        // Create dataset
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 0; i < ops.size(); i++) {
+            dataset.addValue(ops.get(i), "Ops", String.format("V=%d", i+1));
+            dataset.addValue(ElogV.get(i), "ElogV", String.format("V=%d", i+1));
+        }
  
-         // Create chart
-         JFreeChart chart = ChartFactory.createLineChart(
-                 "Ops and ElogV", // Chart title
-                 "Experiment number", // X-axis label
-                 "Magnitude", // Y-axis label
-                 dataset, // Dataset
-                 PlotOrientation.VERTICAL, // Plot orientation
-                 true, // Show legend
-                 true, // Use tooltips
-                 false // Generate URLs
-         );
+        // Create chart
+        JFreeChart chart = ChartFactory.createLineChart(
+                "Ops and ElogV", // Chart title
+                "Experiment number", // X-axis label
+                "Magnitude", // Y-axis label
+                dataset, // Dataset
+                PlotOrientation.VERTICAL, // Plot orientation
+                true, // Show legend
+                true, // Use tooltips
+                false // Generate URLs
+        );
          
-         try {
-             ChartUtilities.writeChartAsJPEG(new FileOutputStream("data/chart_javalib.jpeg"), chart, 600, 400);
-         } catch (IOException e) {e.printStackTrace();}
-         
+        try {
+            ChartUtilities.writeChartAsJPEG(new FileOutputStream("data/chart_javalib.jpeg"), chart, 600, 400);
+        } catch (IOException e) {e.printStackTrace();}
+    
 
-
-         // Creating line chart using python
-         try {
+        // Creating line chart using python
+        try {
             ProcessBuilder pb = new ProcessBuilder("python3", "src/PythonScripts/plot.py");
             pb.redirectErrorStream(true);
             pb.redirectOutput(ProcessBuilder.Redirect.INHERIT);
             Process process = pb.start();
             int exitCode = process.waitFor();
             System.out.println("Exited with code " + exitCode);
-         }
-         catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-         }
+        }
+        catch (IOException | InterruptedException e) {
+           e.printStackTrace();
+        }
     }    
 }

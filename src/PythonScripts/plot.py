@@ -38,3 +38,17 @@ plt.ylabel('Runtime')
 plt.legend()
 plt.savefig("data/chart_pylib.jpeg")
 plt.show()
+
+# Calculating correlation coefficient
+V_array = np.array(V_array)
+ops_array = np.array(ops_array)
+ElogV_array = np.array(ElogV_array)
+
+r = np.corrcoef(ops_array, ElogV_array)[0,1]
+
+print("Correlation coefficient: ", r)
+
+plt.plot(ops_array, ElogV_array, 'o')
+plt.title("Correlation between measured operations and theoretical bound")
+plt.savefig("data/correlation.jpeg")
+plt.show()
