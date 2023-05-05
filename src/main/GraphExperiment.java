@@ -8,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Locale;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
@@ -161,8 +160,8 @@ public class GraphExperiment {
         ArrayList<Double> ops = new ArrayList<>();
         ArrayList<Double> ElogV = new ArrayList<>();
         File file = new File("data/Plot.txt");
-        Scanner scanner = new Scanner(file).useLocale(Locale.forLanguageTag("C.UTF-8"));
-        scanner.nextLine(); // Skip heading
+        Scanner scanner = new Scanner(file);
+        scanner.nextLine();
         while (scanner.hasNext()) {
             int v = scanner.nextInt();
             int op = scanner.nextInt();
